@@ -1,0 +1,32 @@
+{
+  "name": "Litmus Email Anlaytics Radar",
+  "version": "0.5",
+  "description": "Detects if the email your viewing in gmail has an Email Analytics tracking code in it",
+   "background" : {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "page_action" :
+  {
+    "default_icon" : "litmus-icon-19.png",
+    "default_title" : "There's an ea tracking code in this email!"
+  },
+  "icons" : {
+    "48" : "litmus-icon-48.png",
+    "128" : "litmus-icon-128.png"
+  },
+  "permissions": [ "declarativeContent" ],
+  "content_scripts": [
+    {
+      "matches": ["https://mail.google.com/*"],
+      "js": ["content.js"]
+    }
+  ],
+  "web_accessible_resources": [
+    "jquery-1.11.1.min.js",
+    "gmail.js",
+    "main.js",
+    "litmus-icon-19.png"
+  ],
+  "manifest_version": 2
+}
