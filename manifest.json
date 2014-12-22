@@ -1,6 +1,6 @@
 {
   "name": "Litmus Email Anlaytics Radar",
-  "version": "0.5",
+  "version": "0.6",
   "description": "Detects if the email your viewing in gmail has an Email Analytics tracking code in it",
    "background" : {
     "scripts": ["background.js"],

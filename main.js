@@ -18,22 +18,54 @@ var main = function(){
 
 gmail = new Gmail();
 
-	gmail.observe.on("open_email", function(id, url, body, xhr) {
-  		radar();
+	gmail.observe.on("view_thread", function(id, url, body, xhr) {
+      repeat(radar,3);
 	});
+
+  gmail.observe.on("open_email", function(id, url, body, xhr) {
+      repeat(radar,3);
+  });
 
 	gmail.observe.on("refresh", function(url, body, data, xhr) {
-  		radar();
-	});
+      repeat(radar,3);
+  });
 
+}
+
+function repeat(f, times){
+    var counter = 0;
+    var looper = setInterval(function(){ 
+    counter++;
+
+    if (counter >= times)
+    {
+        clearInterval(looper);
+    }
+      f();
+    }, 500);
 }
 
 function foundEaCode(){
-  return window.document.querySelectorAll("img[src*='emltrk.com']").length > 0
+  var selector = "img[src*='emltrk.com']";
+  var found = false;
+  var email = gmail.get.displayed_email_data();
+  try{
+    var html = email.threads[email.last_email].content_html;
+    var emailData = jQuery(html);
+    var imgs = jQuery(selector, emailData);
+    found = imgs.length > 0;
+    console.log("radar::" + found);
+  }
+  catch(e){
+    console.log('radar error: ' +  e);
+  }
+  return found || window.document.querySelectorAll(selector).length > 0
 }
 
 function radar(){
+  console.log('radar');
 	if(foundEaCode()){
+          console.log('radar');
       		var subject = document.querySelectorAll("table[role='presentation']:not([style*='display: none'])")[0].getElementsByTagName("h2")[0];
       		if(!subject.innerHTML.match(/litmus-icon-19/)) {
       			var texts = " title='There&#39;s an ea tracking code in this email!' alt='There is an ea tracking code in this email!' ";
