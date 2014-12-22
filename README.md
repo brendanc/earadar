@@ -9,7 +9,7 @@ Email Analytics Radar (EA Radar) is a chrome extension that will detect if the e
 
 The extension uses [Gmail.js](https://github.com/KartikTalwar/gmail.js) in combination with [Page Actions](https://developer.chrome.com/extensions/pageAction) and [Content Scripts](https://developer.chrome.com/extensions/content_scripts).
 
-The script effective looks for the existance of an image following the pattern of Litmus Email Analytics tracking codes 
+The script looks for the existance of an image following the pattern of Litmus Email Analytics tracking codes 
 
 ```
 function foundEaCode(){
