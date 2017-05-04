@@ -63,15 +63,16 @@ function foundEaCode(){
 }
 
 function radar(){
-  console.log('radar');
 	if(foundEaCode()){
-          console.log('radar');
-      		var subject = document.querySelectorAll("table[role='presentation']:not([style*='display: none'])")[0].getElementsByTagName("h2")[0];
-      		if(!subject.innerHTML.match(/litmus-icon-19/)) {
+
+       var thread = new gmail.dom.thread($('div.if'));
+       var subject = thread.dom('subject');
+
+      		if(!subject.html().match(/litmus-icon-19/)) {
       			var texts = " title='There&#39;s an ea tracking code in this email!' alt='There is an ea tracking code in this email!' ";
       			var styles = " style='vertical-align:middle; padding-right:7px;' ";
       			var img = "<img src='" + litmus_icon_19 + "'" + texts + styles + " />";
-      			subject.innerHTML = img  + "<span>" + subject.innerHTML + "</span>";
+      			subject.html(img  + "<span>" + subject.html() + "</span>");
       		}
   		}
 }
